@@ -50,21 +50,23 @@
        * using 'navigator.sendBeacon' in browser that support it.
        */
       var captureOutboundLink = function(url) {
-        ga("send", "event", "outbound", "click", url, {
-          transport: "beacon",
-          hitCallback: function() {
+        gtag("event", "click", {
+          event_category: "outbound",
+          event_label: url,
+          transport_type: "beacon",
+          event_callback: function() {
             document.location = url;
           }
         });
       };
 
-      /*var links = document.getElementsByTagName("a");
+      var links = document.getElementsByTagName("a");
       for (var linkIndex = 0; linkIndex < links.length; linkIndex++) {
         links[linkIndex].onclick = function(e) {
           captureOutboundLink(this.getAttribute("href"));
           return false;
         };
-      }*/
+      }
     </script>
   </body>
 </html>
