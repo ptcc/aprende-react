@@ -60,13 +60,20 @@
         });
       };
 
-      var links = document.getElementsByTagName("a");
-      for (var linkIndex = 0; linkIndex < links.length; linkIndex++) {
-        links[linkIndex].onclick = function(e) {
-          captureOutboundLink(this.getAttribute("href"));
-          return false;
-        };
-      }
+      gtag("event", "setup", {
+        event_category: "setup",
+        event_label: "setup link tracking",
+        transport_type: "beacon",
+        event_callback: function() {
+          var links = document.getElementsByTagName("a");
+          for (var linkIndex = 0; linkIndex < links.length; linkIndex++) {
+            links[linkIndex].onclick = function(e) {
+              captureOutboundLink(this.getAttribute("href"));
+              return false;
+            };
+          }
+        }
+      });
     </script>
   </body>
 </html>
